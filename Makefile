@@ -35,3 +35,6 @@ lib: $(OBJS)
 run:
 	${BIN}
 
+py:
+	pytest
+

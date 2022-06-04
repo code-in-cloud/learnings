@@ -3,3 +3,4 @@ lib/
 obj/
 .vscode/
 venv
+__pycache__/
