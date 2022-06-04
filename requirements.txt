@@ -1,0 +1,6 @@
+pylint
+pytest
+black
+autopep8
+jupyterlab
+numpy
