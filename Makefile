@@ -5,15 +5,18 @@ CCFLAGS=-Wall -g -O0
 SRCDIR=src
 OBJDIR=obj
 LIBDIR=lib
-TESTDIR=tests
 BINDIR=bin
+TESTSRCDIR=tests
+TESTBINDIR=$(TESTSRCDIR)/$(BINDIR)
+
 BIN=$(BINDIR)/main
 SUBMIT=learning.zip
 
 
 SRCS=$(wildcard $(SRCDIR)/*.c)
 OBJS=$(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
-TESTS=$(wildcard $(TESTDIR)/*.c)
+TESTS=$(wildcard $(TESTSRCDIR)/*.c)
+TESTBINS=$(patsubst $(TESTSRCDIR)/%.c,$(TESTBINDIR)/%,$(TESTS))
 
 all: $(BIN)
 
@@ -37,4 +40,14 @@ run:
 
 py:
 	pytest
+
+$(TESTBINDIR):
+	mkdir -p -v $@
+
+test: $(TESTBINDIR) $(TESTBINS)
+	for test in $(TESTBINS) ; do ./$$test ; done
+
+$(TESTBINS): $(TESTS)
+	$(CC) $(CCFLAGS) $< $(OBJS) -o $@ -lcriterion
+
 
