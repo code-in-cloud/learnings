@@ -30,7 +30,7 @@ submit:
 	rm $(SUBMIT) 2>/dev/null || zip $(SUBMIT) $(BIN)
 
 clean:
-	rm -f ${OBJDIR}/* ${LIBDIR}/* ${BINDIR}/*
+	rm -f ${OBJDIR}/* ${LIBDIR}/* ${BINDIR}/* $(TESTBINDIR)/*
 
 lib: $(OBJS)
 	ar rcs ${LIBDIR}/lib.a $<
@@ -44,7 +44,7 @@ py:
 $(TESTBINDIR):
 	mkdir -p -v $@
 
-test: $(TESTBINDIR) $(TESTBINS)
+test: $(TESTBINDIR) $(OBJS) $(TESTBINS)
 	for test in $(TESTBINS) ; do ./$$test ; done
 
 $(TESTBINS): $(TESTS)

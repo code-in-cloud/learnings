@@ -1,3 +1,6 @@
+from generator import get_random_list
+from timeit import timeit
+
 def merge_sort(iplist):
     size = len(iplist) if iplist else -1
     if size > 1:
@@ -73,9 +76,12 @@ def merge_sort(inp_arr):
             q += 1
             r += 1
 
+"""
+
 
 if __name__ == "__main__":
-    iplist = [2,3,1,7,9,5,6]
-    merge_sort(iplist)
-    print(iplist)
-"""
+    
+    iplist = get_random_list(1000000)
+    
+    #merge_sort(iplist)
+    print("Execution time = ", timeit(lambda: merge_sort(iplist), number=1))
