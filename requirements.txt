@@ -4,3 +4,5 @@ black
 autopep8
 jupyterlab
 numpy
+pillow
+image
